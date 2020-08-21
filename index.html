@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>PixelArt Maker</title>
+</head>
+<body>
+  <main class="main">
+    <button class="open-btn" type="button">
+      <span class="visually-hidden">Открыть меню</span>
+    </button>
+    <section class="sidebar-menu">
+      <button class="close-btn" type="button">
+        <span class="visually-hidden">Закрыть меню</span>
+      </button>
+      <ul class="sidebar-menu__list tools">
+        <li class="sidebar-menu__item shape-width">
+          <label class="shape-width__label" for="width">
+            Ширина пикселя: <span class="shape-width__range-value">20</span>
+          </label>
+          <input class="shape-width__range" type="range" name="width" id="width" min="10" max="50" step="1" value="20">
+        </li>
+        <li class="sidebar-menu__item shape-quantity">
+          <label class="shape-quantity__label" for="quantity">
+            Количество пикселей (в линию): <span class="shape-quantity__range-value">30</span>
+          </label>
+          <input class="shape-quantity__range" type="range" name="quantity" id="quantity" min="10" max="50" step="1" value="30">
+        </li>
+        <li class="sidebar-menu__item background-color">
+          <label class="background-color__label" for="bgColor">Цвет фона</label>
+          <input class="background-color__input" type="color" value="#ffff00" name="bgColor" id="bgColor">
+        </li>
+        <li class="sidebar-menu__item shape-color">
+          <label class="shape-color__label" for="shapeColor">Цвет пикселя</label>
+          <input class="shape-color__input" type="color" value="#0000ff" name="shapeColor" id="shapeColor">
+        </li>
+        <li class="sidebar-menu__item">
+          <button class="sidebar-menu__button generate-canvas" type="button">Создать холст</button>
+        </li>
+        <li class="sidebar-menu__item">
+          <button class="sidebar-menu__button show-numbers" type="button">Показать номера клеток</button>
+        </li>
+        <li class="sidebar-menu__item">
+          <button class="sidebar-menu__button save-result" type="button">Сохранить результат</button>
+        </li>
+        <li class="sidebar-menu__item">
+          <button class="sidebar-menu__button delete-result" type="button">Удалить результат</button>
+        </li>
+        <li class="sidebar-menu__item">
+          <button class="sidebar-menu__button clear-canvas" type="button">Очистить холст</button>
+        </li>
+        <li class="sidebar-menu__item">
+          <button class="sidebar-menu__button delete-canvas" type="button">Удалить холст</button>
+        </li>
+      </ul>
+    </section>
+
+    <canvas></canvas>
+  </main>
+</body>
+</html>
