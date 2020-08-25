@@ -15,6 +15,9 @@
   let pixelQuantityInLine = document.querySelector('.shape-quantity__range');
   let pixelTotalQuantity = Math.pow(Number(pixelQuantityInLine.value), 2);
 
+  let widthOfCanvas = Number(pixelWidth.value) * Number(pixelQuantityInLine.value);
+  let heightOfCanvas = Number(pixelWidth.value) * Number(pixelQuantityInLine.value);
+
   let backgroundColor = document.querySelector('.background-color__input');
   // let shapeColor = document.querySelector('.shape-color__input');
 
@@ -26,12 +29,13 @@
   let isShown = false;
   let isSelected = false;
 
+  /*
   let generateCanvas = document.querySelector('.generate-canvas');
   let showNumbers = document.querySelector('.show-numbers');
   let saveResult = document.querySelector('.save-result');
   let deleteResult = document.querySelector('.delete-result');
   let clearCanvas = document.querySelector('.clear-canvas');
-  let deleteCanvas = document.querySelector('.delete-canvass');
+  let deleteCanvas = document.querySelector('.delete-canvass');*/
 
   let toggleSidebar = function () {
     if (!sidebarIsOpen) {
@@ -42,19 +46,11 @@
       sidebarBtnDescription.textContent = 'Закрыть меню';
     } else {
       sidebarIsOpen = !sidebarIsOpen;
-      sidebarMenu.style.marginLeft = "-280px";
+      sidebarMenu.style.marginLeft = '-280px';
       sidebarBtn.classList.remove('close-button');
       sidebarBtn.classList.add('open-button');
       sidebarBtnDescription.textContent = 'Открыть меню';
     }
-  };
-
-  let getDimensionOfShape = function () {
-    let width = Number(pixelWidth.value) * Number(pixelQuantityInLine.value);
-    let height = width;
-
-    canvas.setAttribute('width', width);
-    canvas.setAttribute('height', height);
   };
 
   let drawSquares = function (arrayOfSquares, width, height) {
@@ -89,33 +85,31 @@
     }
   }
 
-  let generateSquares = function (x, y, width, height) {
+  let generateSquares = function () {
+    let coordXofPixel = 0;
+    let coordYofPixel = 0;
+
+    let widthOfPixel = Number(pixelWidth.value);
+    let heightOfPixel = Number(pixelWidth.value);
+
+    canvas.setAttribute('width', widthOfCanvas);
+    canvas.setAttribute('height', heightOfCanvas);
+
     let arrOfSquares = [];
     for (let i = 0; i < pixelTotalQuantity; i++) {
-      let square = new Square(x, y);
-      x += width;
-      if (x === width) {
-        y += height;
-        x = 0;
+      let square = new Square(coordXofPixel, coordYofPixel);
+      coordXofPixel += widthOfPixel;
+      if (coordXofPixel === widthOfCanvas) {
+        coordYofPixel += heightOfPixel;
+        coordXofPixel = 0;
       }
       arrOfSquares.push(square);
     }
 
-    drawSquares(arrOfSquares, width, height);
+    drawSquares(arrOfSquares, widthOfPixel, heightOfPixel);
   };
 
-  let squares = function () {
-    let x = 0;
-    let y = 0;
-
-    let width = Number(pixelWidth.value);
-    let height = Number(pixelWidth.value);
-
-    generateSquares(x, y, width, height);
-  };
-
-  getDimensionOfShape();
-  squares();
+  generateSquares();
 
   sidebarBtn.addEventListener('click', toggleSidebar);
 
