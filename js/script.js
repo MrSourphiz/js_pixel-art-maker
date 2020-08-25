@@ -4,8 +4,9 @@
   let ctx = canvas.getContext('2d');
 
   let sidebarMenu = document.querySelector('.sidebar-menu');
-  let openSidebarBtn = document.querySelector('.open-btn');
-  let closeSidebarBtn = document.querySelector('.close-btn');
+  let sidebarBtn = document.querySelector('.sidebar-button');
+  let sidebarBtnDescription = sidebarBtn.querySelector('span');
+  let sidebarIsOpen = false;
 
   let widthRangeValue = document.querySelector('.shape-width__range-value');
   let quantityRangeValue = document.querySelector('.shape-quantity__range-value');
@@ -13,6 +14,9 @@
   let pixelWidth = document.querySelector('.shape-width__range');
   let pixelQuantityInLine = document.querySelector('.shape-quantity__range');
   let pixelTotalQuantity = Math.pow(Number(pixelQuantityInLine.value), 2);
+
+  let widthOfCanvas = Number(pixelWidth.value) * Number(pixelQuantityInLine.value);
+  let heightOfCanvas = Number(pixelWidth.value) * Number(pixelQuantityInLine.value);
 
   let backgroundColor = document.querySelector('.background-color__input');
   // let shapeColor = document.querySelector('.shape-color__input');
@@ -25,29 +29,28 @@
   let isShown = false;
   let isSelected = false;
 
-  /* let generateCanvas = document.querySelector('.generate-canvas');
+  /*
+  let generateCanvas = document.querySelector('.generate-canvas');
   let showNumbers = document.querySelector('.show-numbers');
   let saveResult = document.querySelector('.save-result');
   let deleteResult = document.querySelector('.delete-result');
   let clearCanvas = document.querySelector('.clear-canvas');
   let deleteCanvas = document.querySelector('.delete-canvass');*/
 
-  let openSidebar = function () {
-    sidebarMenu.style.marginLeft = 0;
-    openSidebarBtn.classList.add('visually-hidden');
-  };
-
-  let closeSidebar = function () {
-    sidebarMenu.style.marginLeft = '-280px';
-    openSidebarBtn.classList.remove('visually-hidden');
-  };
-
-  let getDimensionOfShape = function () {
-    let width = Number(pixelWidth.value) * Number(pixelQuantityInLine.value);
-    let height = width;
-
-    canvas.setAttribute('width', width);
-    canvas.setAttribute('height', height);
+  let toggleSidebar = function () {
+    if (!sidebarIsOpen) {
+      sidebarIsOpen = !sidebarIsOpen;
+      sidebarMenu.style.marginLeft = 0;
+      sidebarBtn.classList.remove('open-button');
+      sidebarBtn.classList.add('close-button');
+      sidebarBtnDescription.textContent = 'Закрыть меню';
+    } else {
+      sidebarIsOpen = !sidebarIsOpen;
+      sidebarMenu.style.marginLeft = '-280px';
+      sidebarBtn.classList.remove('close-button');
+      sidebarBtn.classList.add('open-button');
+      sidebarBtnDescription.textContent = 'Открыть меню';
+    }
   };
 
   let drawSquares = function (arrayOfSquares, width, height) {
@@ -82,36 +85,33 @@
     }
   }
 
-  let generateSquares = function (x, y, width, height) {
+  let generateSquares = function () {
+    let coordXofPixel = 0;
+    let coordYofPixel = 0;
+
+    let widthOfPixel = Number(pixelWidth.value);
+    let heightOfPixel = Number(pixelWidth.value);
+
+    canvas.setAttribute('width', widthOfCanvas);
+    canvas.setAttribute('height', heightOfCanvas);
+
     let arrOfSquares = [];
     for (let i = 0; i < pixelTotalQuantity; i++) {
-      let square = new Square(x, y);
-      x += width;
-      if (x === width) {
-        y += height;
-        x = 0;
+      let square = new Square(coordXofPixel, coordYofPixel);
+      coordXofPixel += widthOfPixel;
+      if (coordXofPixel === widthOfCanvas) {
+        coordYofPixel += heightOfPixel;
+        coordXofPixel = 0;
       }
       arrOfSquares.push(square);
     }
 
-    drawSquares(arrOfSquares, width, height);
+    drawSquares(arrOfSquares, widthOfPixel, heightOfPixel);
   };
 
-  let squares = function () {
-    let x = 0;
-    let y = 0;
+  generateSquares();
 
-    let width = Number(pixelWidth.value);
-    let height = Number(pixelWidth.value);
-
-    generateSquares(x, y, width, height);
-  };
-
-  getDimensionOfShape();
-  squares();
-
-  openSidebarBtn.addEventListener('click', openSidebar);
-  closeSidebarBtn.addEventListener('click', closeSidebar);
+  sidebarBtn.addEventListener('click', toggleSidebar);
 
   pixelWidth.addEventListener('input', function () {
     widthRangeValue.textContent = pixelWidth.value;
