@@ -230,3 +230,94 @@ canvas {
 	width: 600px;
 	margin: 0 auto;
 }
+
+.result-popup {
+	position: fixed;
+
+	top: 10px;
+	left: 25%;
+
+	width: auto;
+	height: auto;
+
+	padding: 20px;
+
+	background-color: rgba(0, 0, 0, 0.7);
+
+	border: 2px solid #ffffff;
+	border-radius: 5px;
+}
+
+.result-popup__wrapper {
+	display: flex;
+	flex-direction: column;
+
+	justify-content: space-between;
+	align-content: center;
+}
+
+.result-popup__info {
+	position:  relative;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	margin-bottom: 5px;
+}
+
+.result-popup__txt {
+	color: white;
+	font-size: 16px;
+	text-transform: uppercase;
+}
+
+.result-popup__btn {
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	width: 50px;
+	height: 50px;
+
+	background-color: transparent;
+
+	border: 3px solid transparent;
+	border-radius: 100%;
+}
+
+.result-popup__btn::after {
+	content: '';
+
+	position: absolute;
+	top: 20px;
+	left: 10px;
+
+	width: 25px;
+	height: 3px;
+
+	background-color: #ffffff;
+
+	transform: rotate(-45deg);
+}
+
+.result-popup__btn::before {
+	content: '';
+
+	position: absolute;
+	top: 20px;
+	left: 10px;
+
+	width: 25px;
+	height: 3px;
+
+	background-color: #ffffff;
+
+	transform: rotate(45deg);
+}
+
+.result-popup__btn:hover {
+	cursor: pointer;
+	border-color: #ffffff;
+}
+
