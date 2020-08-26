@@ -22,9 +22,9 @@
         </li>
         <li class="sidebar-menu__item shape-quantity">
           <label class="shape-quantity__label" for="quantity">
-            Количество пикселей (в линию): <span class="shape-quantity__range-value">30</span>
+            Количество пикселей (в линию): <span class="shape-quantity__range-value">40</span>
           </label>
-          <input class="shape-quantity__range" type="range" name="quantity" id="quantity" min="10" max="50" step="1" value="30">
+          <input class="shape-quantity__range" type="range" name="quantity" id="quantity" min="10" max="50" step="1" value="40">
         </li>
         <li class="sidebar-menu__item background-color">
           <label class="background-color__label" for="bgColor">Цвет фона</label>
@@ -54,6 +54,17 @@
         </li>
       </ul>
     </section>
+
+    <div class="visually-hidden result-popup">
+      <div class="result-popup__wrapper">
+        <div class="result-popup__info">
+          <p class="result-popup__txt">Результат:</p>
+          <button class="result-popup__btn" type="button">
+            <span class="visually-hidden">Закрыть попа</span>
+          </button>
+        </div>
+      </div>
+    </div>
 
     <canvas></canvas>
   </main>
