@@ -2,6 +2,7 @@
   "name": "js-pixel-art-maker",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://mrsourphiz.github.io/js_pixel-art-maker/",
   "description": "Простая прога  для рисования пиксельных артов на ванильном JS",
   "repository": {
     "type": "git",
